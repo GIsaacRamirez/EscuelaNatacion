@@ -39,6 +39,8 @@ public class Menu extends javax.swing.JFrame {
         MenuAgregarCliente = new javax.swing.JMenuItem();
         MenuModificarCliente = new javax.swing.JMenuItem();
         MenuBuscarCliente = new javax.swing.JMenuItem();
+        MenuEliminarCliente = new javax.swing.JMenuItem();
+        MenuMostrarClientes = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -116,6 +118,22 @@ public class Menu extends javax.swing.JFrame {
         });
         MenuClientes.add(MenuBuscarCliente);
 
+        MenuEliminarCliente.setText("Baja/Alta Cliente");
+        MenuEliminarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuEliminarClienteActionPerformed(evt);
+            }
+        });
+        MenuClientes.add(MenuEliminarCliente);
+
+        MenuMostrarClientes.setText("Mostrar Clientes");
+        MenuMostrarClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuMostrarClientesActionPerformed(evt);
+            }
+        });
+        MenuClientes.add(MenuMostrarClientes);
+
         jMenuBar1.add(MenuClientes);
 
         setJMenuBar(jMenuBar1);
@@ -183,6 +201,18 @@ public class Menu extends javax.swing.JFrame {
         buscarCliente.setVisible(true);
     }//GEN-LAST:event_MenuBuscarClienteActionPerformed
 
+    private void MenuEliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuEliminarClienteActionPerformed
+        // TODO add your handling code here:
+        BuscarCliente bBajaCliente=new BuscarCliente(3);//
+        bBajaCliente.setVisible(true);
+    }//GEN-LAST:event_MenuEliminarClienteActionPerformed
+
+    private void MenuMostrarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuMostrarClientesActionPerformed
+        // TODO add your handling code here:
+        MostrarClientes mostrarClientes =new MostrarClientes();
+        mostrarClientes.setVisible(true);
+    }//GEN-LAST:event_MenuMostrarClientesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -224,9 +254,11 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem MenuBuscarCliente;
     private javax.swing.JMenuItem MenuBuscarEmpleado;
     private javax.swing.JMenu MenuClientes;
+    private javax.swing.JMenuItem MenuEliminarCliente;
     private javax.swing.JMenu MenuEmpleado;
     private javax.swing.JMenuItem MenuModificarCliente;
     private javax.swing.JMenuItem MenuModificarEmpleado;
+    private javax.swing.JMenuItem MenuMostrarClientes;
     private javax.swing.JMenuItem MenuMostrarEmpleados;
     private javax.swing.JMenuItem SubMenuIngresarEmpleado;
     private javax.swing.JMenuBar jMenuBar1;
