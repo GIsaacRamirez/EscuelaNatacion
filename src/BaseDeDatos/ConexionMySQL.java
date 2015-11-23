@@ -19,7 +19,7 @@ public class ConexionMySQL {
         try 
         {
             Class.forName("com.mysql.jdbc.Driver");
-            Conexion = DriverManager.getConnection("jdbc:mysql://192.168.1.68/escuelanatacion", user, pass);
+            Conexion = DriverManager.getConnection("jdbc:mysql://192.168.1.68:3306/escuelanatacion", user, pass);
             System.out.println("Se ha iniciado la conexión con el servidor de forma exitosa");
         } 
         catch (ClassNotFoundException | SQLException ex) 
