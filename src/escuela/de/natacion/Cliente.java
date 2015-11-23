@@ -88,7 +88,7 @@ public class Cliente extends javax.swing.JFrame {
             ConexionMySQL conexion = new ConexionMySQL();
             conexion.MySQLConnection("root","");
             Statement st = Conexion.createStatement();
-            ResultSet rs = st.executeQuery("Select  *from empleado where IdCliente="+id);
+            ResultSet rs = st.executeQuery("Select  *from cliente where IdCliente="+id);
             while(rs.next())
             {
                 int ID= rs.getInt("IdCliente");
