@@ -35,6 +35,10 @@ public class Menu extends javax.swing.JFrame {
         MenuBuscarEmpleado = new javax.swing.JMenuItem();
         MenuBajaAltaEmpleado = new javax.swing.JMenuItem();
         MenuMostrarEmpleados = new javax.swing.JMenuItem();
+        MenuClientes = new javax.swing.JMenu();
+        MenuAgregarCliente = new javax.swing.JMenuItem();
+        MenuModificarCliente = new javax.swing.JMenuItem();
+        MenuBuscarCliente = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,6 +90,34 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar1.add(MenuEmpleado);
         MenuEmpleado.getAccessibleContext().setAccessibleName("MenuEmpleado");
 
+        MenuClientes.setText("Clientes");
+
+        MenuAgregarCliente.setText("Agregar Cliente");
+        MenuAgregarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuAgregarClienteActionPerformed(evt);
+            }
+        });
+        MenuClientes.add(MenuAgregarCliente);
+
+        MenuModificarCliente.setText("Modificar Cliente");
+        MenuModificarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuModificarClienteActionPerformed(evt);
+            }
+        });
+        MenuClientes.add(MenuModificarCliente);
+
+        MenuBuscarCliente.setText("Buscar Cliente");
+        MenuBuscarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuBuscarClienteActionPerformed(evt);
+            }
+        });
+        MenuClientes.add(MenuBuscarCliente);
+
+        jMenuBar1.add(MenuClientes);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -133,6 +165,24 @@ public class Menu extends javax.swing.JFrame {
         mostrar.setVisible(true);
     }//GEN-LAST:event_MenuMostrarEmpleadosActionPerformed
 
+    private void MenuAgregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuAgregarClienteActionPerformed
+        // TODO add your handling code here:
+         Cliente cliente=new Cliente();//
+        cliente.setVisible(true);
+    }//GEN-LAST:event_MenuAgregarClienteActionPerformed
+
+    private void MenuModificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuModificarClienteActionPerformed
+        // TODO add your handling code here:
+         BuscarCliente buscarCliente=new BuscarCliente(2);//
+        buscarCliente.setVisible(true);
+    }//GEN-LAST:event_MenuModificarClienteActionPerformed
+
+    private void MenuBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuBuscarClienteActionPerformed
+        // TODO add your handling code here:
+        BuscarCliente buscarCliente=new BuscarCliente(1);//
+        buscarCliente.setVisible(true);
+    }//GEN-LAST:event_MenuBuscarClienteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -169,9 +219,13 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem MenuAgregarCliente;
     private javax.swing.JMenuItem MenuBajaAltaEmpleado;
+    private javax.swing.JMenuItem MenuBuscarCliente;
     private javax.swing.JMenuItem MenuBuscarEmpleado;
+    private javax.swing.JMenu MenuClientes;
     private javax.swing.JMenu MenuEmpleado;
+    private javax.swing.JMenuItem MenuModificarCliente;
     private javax.swing.JMenuItem MenuModificarEmpleado;
     private javax.swing.JMenuItem MenuMostrarEmpleados;
     private javax.swing.JMenuItem SubMenuIngresarEmpleado;
