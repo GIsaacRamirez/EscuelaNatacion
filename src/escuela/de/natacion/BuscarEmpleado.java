@@ -107,7 +107,7 @@ public class BuscarEmpleado extends javax.swing.JFrame {
             try 
             {
                 ConexionMySQL conexion = new ConexionMySQL();
-                conexion.MySQLConnection("root","");
+                conexion.MySQLConnection();
                 Statement st = Conexion.createStatement();
                 ResultSet rs = st.executeQuery("Select IdEmpleado from empleado where IdEmpleado="+Integer.parseInt(txtBuscarIdEmpleado.getText()));
                 while(rs.next())

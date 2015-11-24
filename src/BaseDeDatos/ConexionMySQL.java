@@ -14,12 +14,13 @@ import java.util.logging.Logger;
 public class ConexionMySQL {
  
     public static Connection Conexion;
- 
-    public void MySQLConnection(String user, String pass) {
+    String user="root";
+    String pass="";
+    public void MySQLConnection() {
         try 
         {
             Class.forName("com.mysql.jdbc.Driver");
-            Conexion = DriverManager.getConnection("jdbc:mysql://192.168.1.65:3306/escuelanatacion", user, pass);
+            Conexion = DriverManager.getConnection("jdbc:mysql://localhost/escuelanatacion", user, pass);
             System.out.println("Se ha iniciado la conexión con el servidor de forma exitosa");
         } 
         catch (ClassNotFoundException | SQLException ex) 

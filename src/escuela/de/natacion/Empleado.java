@@ -36,7 +36,7 @@ public class Empleado extends javax.swing.JFrame {
     {
         try {
             ConexionMySQL conexion = new ConexionMySQL();
-            conexion.MySQLConnection("root","");
+            conexion.MySQLConnection();
             Statement st = Conexion.createStatement();
             ResultSet rs = st.executeQuery("Select *from Tipoempleado ORDER BY IdTipoEmpleado");
             while(rs.next())
@@ -55,7 +55,7 @@ public class Empleado extends javax.swing.JFrame {
         try
         {
             ConexionMySQL conexion = new ConexionMySQL();
-            conexion.MySQLConnection("root","");
+            conexion.MySQLConnection();
             Statement st = Conexion.createStatement();
             ResultSet rs = st.executeQuery("Select count(IdEmpleado) as num from empleado");
             
@@ -106,7 +106,7 @@ public class Empleado extends javax.swing.JFrame {
             this.btnBajaEmpleado.setVisible(false);
             this.btnModificarEmpleado1.setVisible(false);
             ConexionMySQL conexion = new ConexionMySQL();
-            conexion.MySQLConnection("root","");
+            conexion.MySQLConnection();
             Statement st = Conexion.createStatement();
             ResultSet rs = st.executeQuery("Select  *from empleado where IdEmpleado="+id);
             while(rs.next())
@@ -514,7 +514,7 @@ public class Empleado extends javax.swing.JFrame {
             if(correcto==true)
             {
                 ConexionMySQL mysql = new ConexionMySQL();
-                mysql.MySQLConnection("root","");
+                mysql.MySQLConnection();
                 String Query = "INSERT INTO empleado "
                     + "(IdEmpleado,"
                     + "ApellidoPaterno,"
@@ -566,7 +566,7 @@ public class Empleado extends javax.swing.JFrame {
         try 
         {
             ConexionMySQL conexion = new ConexionMySQL();
-            conexion.MySQLConnection("root","");
+            conexion.MySQLConnection();
             
             String Query;
             Query="UPDATE empleado SET ApellidoPaterno='"+ApellidoPaternoEmpleado+"',"
@@ -598,7 +598,7 @@ public class Empleado extends javax.swing.JFrame {
         try 
         {
             ConexionMySQL conexion = new ConexionMySQL();
-            conexion.MySQLConnection("root","");
+            conexion.MySQLConnection();
             Status=cmbEstado.getSelectedIndex();
             String Query;
             Query="UPDATE empleado SET Status='"+Status+"'"

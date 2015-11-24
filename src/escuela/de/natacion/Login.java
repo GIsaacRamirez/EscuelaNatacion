@@ -106,7 +106,7 @@ public class Login extends javax.swing.JFrame {
        try
         {
             ConexionMySQL conexion = new ConexionMySQL();
-            conexion.MySQLConnection("root","");
+            conexion.MySQLConnection();
             Statement st = Conexion.createStatement();
             ResultSet rs = st.executeQuery("Select *from usuario WHERE usuario='"+txtUsuarioLogin.getText()+"'");
             if(rs.next())

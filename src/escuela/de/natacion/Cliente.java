@@ -38,7 +38,7 @@ public class Cliente extends javax.swing.JFrame {
         try
         {
             ConexionMySQL conexion = new ConexionMySQL();
-            conexion.MySQLConnection("root","");
+            conexion.MySQLConnection();
             Statement st = Conexion.createStatement();
             ResultSet rs = st.executeQuery("Select count(IdCliente) as num from cliente");
             while (rs.next())
@@ -86,7 +86,7 @@ public class Cliente extends javax.swing.JFrame {
             this.btnBajaCliente.setVisible(false);
             this.btnModificarCliente.setVisible(false);
             ConexionMySQL conexion = new ConexionMySQL();
-            conexion.MySQLConnection("root","");
+            conexion.MySQLConnection();
             Statement st = Conexion.createStatement();
             ResultSet rs = st.executeQuery("Select  *from cliente where IdCliente="+id);
             while(rs.next())
@@ -378,7 +378,7 @@ public class Cliente extends javax.swing.JFrame {
             if(correcto==true)
             {
                 ConexionMySQL mysql = new ConexionMySQL();
-                mysql.MySQLConnection("root","");
+                mysql.MySQLConnection();
                 String Query = "INSERT INTO cliente "
                 + "(IdCliente,"
                 + "ApellidoPaterno,"
@@ -433,7 +433,7 @@ public class Cliente extends javax.swing.JFrame {
         try
         {
             ConexionMySQL conexion = new ConexionMySQL();
-            conexion.MySQLConnection("root","");
+            conexion.MySQLConnection();
 
             String Query;
             Query="UPDATE cliente SET ApellidoPaterno='"+ApellidoPaternoCliente+"',"
@@ -463,7 +463,7 @@ public class Cliente extends javax.swing.JFrame {
         try
         {
             ConexionMySQL conexion = new ConexionMySQL();
-            conexion.MySQLConnection("root","");
+            conexion.MySQLConnection();
             Status=cmbEstado.getSelectedIndex();
             String Query;
             Query="UPDATE cliente SET Status='"+Status+"'"

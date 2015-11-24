@@ -39,7 +39,7 @@ public class MostrarClientes extends javax.swing.JFrame {
                     + " FROM  cliente ";
             String []datos = new String[7];
             ConexionMySQL conexion = new ConexionMySQL();
-            conexion.MySQLConnection("root","");
+            conexion.MySQLConnection();
             Statement st = Conexion.createStatement();
             ResultSet rs = st.executeQuery(SQL);
             while(rs.next())
@@ -78,8 +78,6 @@ public class MostrarClientes extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaClientes = new javax.swing.JTable();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         tablaClientes.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         tablaClientes.setModel(new javax.swing.table.DefaultTableModel(

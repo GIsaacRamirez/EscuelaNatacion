@@ -100,7 +100,7 @@ public class BuscarCliente extends javax.swing.JFrame {
             try
             {
                 ConexionMySQL conexion = new ConexionMySQL();
-                conexion.MySQLConnection("root","");
+                conexion.MySQLConnection();
                 Statement st = Conexion.createStatement();
                 ResultSet rs = st.executeQuery("Select IdCliente from cliente where IdCliente="+Integer.parseInt(txtBuscarIdCliente.getText()));
                 while(rs.next())
