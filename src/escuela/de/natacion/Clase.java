@@ -5,6 +5,13 @@
  */
 package escuela.de.natacion;
 
+import BaseDeDatos.ConexionMySQL;
+import static BaseDeDatos.ConexionMySQL.Conexion;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ultron
@@ -20,7 +27,32 @@ public class Clase extends javax.swing.JFrame {
      */
     public Clase() {
         initComponents();
+        muestraInstructores();
     }
+    
+   public void muestraInstructores()
+   {
+       try
+            {
+                ConexionMySQL conexion = new ConexionMySQL();
+                conexion.MySQLConnection();
+                Statement st = Conexion.createStatement();
+                ResultSet rs = st.executeQuery("SELECT IdEmpleado, Nombre FROM empleado WHERE Instructor=true");
+                while(rs.next())
+                {
+                    int id= rs.getInt("IdEmpleado");
+                    String nombre=rs.getString("Nombre");
+                    jComboBox2.addItem(Integer.toString(id)+","+nombre);
+                }
+                rs.close();
+                conexion.closeConnection();
+                
+            }
+            catch (SQLException ex)
+            {
+
+            }
+   }
 
     /**
      * This method is called from within the constructor to initialize the form.
