@@ -15,7 +15,7 @@ public class ConexionMySQL {
  
     public static Connection Conexion;
     String user="root";
-    String pass="Rigo1994";
+    String pass="";
     public void MySQLConnection() {
         try 
         {
