@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
  * okokoko
  */
 public class Clase extends javax.swing.JFrame {
-    String IdClase,IdInstructor,HoraInicio,HoraFinal,Precio,Cupo;
+    String IdClase,IdInstructor,HoraInicio,HoraFinal,Precio,Cupo,Disponibles;
     /**
      * Creates new form Clase
      */
@@ -46,7 +46,7 @@ public class Clase extends javax.swing.JFrame {
         HoraFinal=auxFin+""+HoraFinal.substring(HoraFinal.indexOf(":")+1,HoraFinal.length())+"00";
         Precio=txtPrecio.getText();
         Cupo=cmbCupo.getSelectedItem().toString();
-
+        Disponibles=Cupo;
         return true;
    }
     
@@ -116,14 +116,16 @@ public class Clase extends javax.swing.JFrame {
                     + "HoraInicio,"
                     + "HoraFinal,"
                     + "Precio,"
-                    + "Cupo) "
+                    + "Cupo,"
+                        + "Disponibles) "
                     + "VALUES "
                     + "("+IdClase+","
                     + ""+IdInstructor+","
                     + "'"+HoraInicio+"',"
                     + "'"+HoraFinal+"',"
                     + ""+Precio+","
-                    + ""+Cupo+")";
+                    + ""+Cupo+","+Disponibles
+                        + ")";
                 
                 
                 
