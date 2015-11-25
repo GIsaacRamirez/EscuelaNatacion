@@ -163,6 +163,11 @@ public class Menu extends javax.swing.JFrame {
         MenuClase.add(MenuAgregarClase);
 
         MenuBuscarClase.setText("Buscar");
+        MenuBuscarClase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuBuscarClaseActionPerformed(evt);
+            }
+        });
         MenuClase.add(MenuBuscarClase);
 
         MenuMostrarClases.setText("Mostrar todas");
@@ -286,6 +291,12 @@ public class Menu extends javax.swing.JFrame {
         RegistrarPago pago=new RegistrarPago();
         pago.setVisible(true);
     }//GEN-LAST:event_MenuRegistrarPagoActionPerformed
+
+    private void MenuBuscarClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuBuscarClaseActionPerformed
+        // TODO add your handling code here:
+        BuscarClase bc=new BuscarClase();
+        bc.setVisible(true);
+    }//GEN-LAST:event_MenuBuscarClaseActionPerformed
 
     /**
      * @param args the command line arguments
