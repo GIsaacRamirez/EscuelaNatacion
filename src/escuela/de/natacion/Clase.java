@@ -10,6 +10,7 @@ import static BaseDeDatos.ConexionMySQL.Conexion;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.StringTokenizer;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,7 +22,7 @@ import javax.swing.JOptionPane;
  * okokoko
  */
 public class Clase extends javax.swing.JFrame {
-
+    String IdClase,IdInstructor,HoraInicio,HoraFinal,Precio,Cupo;
     /**
      * Creates new form Clase
      */
@@ -29,6 +30,41 @@ public class Clase extends javax.swing.JFrame {
         initComponents();
         muestraInstructores();
     }
+    public boolean obtenDatos(){
+        GeneraIdClase();
+        StringTokenizer tkn=new StringTokenizer(",",jComboBox2.getSelectedItem().toString());
+        IdInstructor=tkn.nextToken();
+        HoraInicio=jComboBox3.getSelectedItem().toString();
+        HoraFinal=jComboBox4.getSelectedItem().toString();
+        Precio=jTextField1.getText();
+        Cupo=jComboBox5.getSelectedItem().toString();
+       return true;
+   }
+    
+    public void GeneraIdClase()
+   {
+       try
+            {
+                ConexionMySQL conexion = new ConexionMySQL();
+                conexion.MySQLConnection();
+                Statement st = Conexion.createStatement();
+                ResultSet rs = st.executeQuery("SELECT COUNT(clase.IdClase) as id FROM clase;");
+                while(rs.next())
+                {
+                    int id= rs.getInt("Id");
+                    this.IdClase=Integer.toString(id+1);
+                }
+                rs.close();
+                conexion.closeConnection();
+                
+            }
+            catch (SQLException ex)
+            {
+
+            }
+   }
+    
+    
     
    public void muestraInstructores()
    {
@@ -53,6 +89,47 @@ public class Clase extends javax.swing.JFrame {
 
             }
    }
+   
+   public void RegistraClase(){
+        try 
+        {
+            
+            if(obtenDatos()==true)
+            {
+                ConexionMySQL mysql = new ConexionMySQL();
+                mysql.MySQLConnection();
+                String Query = "INSERT INTO empleado "
+                    + "(IdClase,"
+                    + "IdInstructor,"
+                    + "HoraInicio,"
+                    + "HoraFinal,"
+                    + "Precio,"
+                    + "Cupo,) "
+                    + "VALUES "
+                    + "("+IdClase+","
+                    + ""+IdInstructor+","
+                    + "'"+HoraInicio+"',"
+                    + "'"+HoraFinal+"',"
+                    + ""+Precio+","
+                    + ""+Cupo+")";
+            
+                Statement st = Conexion.createStatement();
+                st.executeUpdate(Query);
+                mysql.closeConnection();
+                JOptionPane.showMessageDialog(null, "Clase registrada");
+            }
+            else
+            {
+            }
+            
+        } 
+        catch (SQLException ex) 
+        {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+       
+   }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
