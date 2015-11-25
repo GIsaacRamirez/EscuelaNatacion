@@ -20,73 +20,76 @@ import javax.swing.table.DefaultTableModel;
  * @author Guillermo
  */
 public class RegistrarPago extends javax.swing.JFrame {
+
     DefaultTableModel modelo;
-   
-    public void obtenerFolio()
-    {
-        try 
-        {            
+    DefaultTableModel asignar;
+    double total = 0;
+
+    public void obtenerFolio() {
+        try {
             ConexionMySQL conexion = new ConexionMySQL();
             conexion.MySQLConnection();
             Statement st = Conexion.createStatement();
             ResultSet rs = st.executeQuery("Select count(Folio) as num from pago");
-            if(rs.next())
-            {
-                int num=rs.getInt("num");
-                if(num==0)
-                {
+            if (rs.next()) {
+                int num = rs.getInt("num");
+                if (num == 0) {
                     this.txtFolio.setText("1");
-                }
-                else
-                {
-                    ResultSet max = st.executeQuery("Select max(IdEmpleado) as maximo from empleado");
+                } else {
+                    ResultSet max = st.executeQuery("Select max(folio) as maximo from pago");
                     max.last();
-                    int maximo= max.getInt("maximo");
-                    this.txtFolio.setText(""+(maximo+1));       
+                    int maximo = max.getInt("maximo");
+                    this.txtFolio.setText("" + (maximo + 1));
                 }
             }
-                rs.close();
-                conexion.closeConnection();
+            rs.close();
+            conexion.closeConnection();
         } catch (SQLException ex) {
             Logger.getLogger(RegistrarPago.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void obtenerFecha()
-    {
+
+    public void obtenerFecha() {
         try {
             ConexionMySQL conexion = new ConexionMySQL();
             conexion.MySQLConnection();
             Statement st = Conexion.createStatement();
             ResultSet rs = st.executeQuery("Select now() as fecha");
-            if(rs.next())
-            {
+            if (rs.next()) {
                 txtHora.setText(rs.getTimestamp("fecha").toString());
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(RegistrarPago.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
      * Creates new form RegistrarPago
      */
     public RegistrarPago() {
         initComponents();
-        obtenerFolio();  
+        obtenerFolio();
         obtenerFecha();
-         modelo=(DefaultTableModel) tablaBuscarClase.getModel();
+        modelo = (DefaultTableModel) tablaBuscarClase.getModel();
         modelo.addColumn("IdClase");
         modelo.addColumn("Instructor");
         modelo.addColumn("Inicio");
         modelo.addColumn("Fin");
         modelo.addColumn("Precio");
         modelo.addColumn("Cupo");
-        
+        modelo.addColumn("Disponibles");
+
+        asignar = (DefaultTableModel) tablaAsignar.getModel();
+        asignar.addColumn("IdClase");
+        asignar.addColumn("Instructor");
+        asignar.addColumn("Inicio");
+        asignar.addColumn("Fin");
+        asignar.addColumn("Precio");
+        asignar.addColumn("Cupo");
+        asignar.addColumn("Disponibles");
     }
-    
-        
-        
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -96,32 +99,67 @@ public class RegistrarPago extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jPopupMenu2 = new javax.swing.JPopupMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         lblFolio = new javax.swing.JLabel();
         txtFolio = new javax.swing.JTextField();
         lblHora = new javax.swing.JLabel();
         txtHora = new javax.swing.JTextField();
-        lblBuscarCliente = new javax.swing.JLabel();
-        txtBuscarCliente = new javax.swing.JTextField();
+        txtCliente = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         btnBuscarCliente = new javax.swing.JButton();
-        btnBuscarClase = new javax.swing.JButton();
-        lblBuscarClase = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablaBuscarCliente = new javax.swing.JTable();
-        cmbDias = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
+        txtBuscarCliente = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaBuscarClase = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tablaAsignar = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
+        txtTotal = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        txtCantidad = new javax.swing.JTextField();
+        lblCambio = new javax.swing.JLabel();
+        txtCambio = new javax.swing.JTextField();
+        btnGuardar = new javax.swing.JButton();
+
+        jMenuItem1.setText("Agregar a la cuenta");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem1);
+
+        jMenuItem2.setText("Quitar de la cuenta");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jPopupMenu2.add(jMenuItem2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lblFolio.setText("Folio:");
 
         txtFolio.setEditable(false);
+        txtFolio.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtFolio.setEnabled(false);
 
         lblHora.setText("Hora:");
 
         txtHora.setEditable(false);
+        txtHora.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtHora.setEnabled(false);
 
-        lblBuscarCliente.setText("Buscar por cliente");
+        txtCliente.setEditable(false);
+        txtCliente.setEnabled(false);
+
+        jLabel3.setText("Cliente:");
 
         btnBuscarCliente.setText("Buscar Cliente");
         btnBuscarCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -130,26 +168,9 @@ public class RegistrarPago extends javax.swing.JFrame {
             }
         });
 
-        btnBuscarClase.setText("Buscar Clase");
-        btnBuscarClase.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarClaseActionPerformed(evt);
-            }
-        });
+        jLabel4.setText("Buscar Cliente:");
 
-        lblBuscarClase.setText("Buscar por clase");
-
-        tablaBuscarCliente.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane1.setViewportView(tablaBuscarCliente);
-
-        cmbDias.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" }));
+        jLabel1.setText("Clases");
 
         tablaBuscarClase.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -159,47 +180,92 @@ public class RegistrarPago extends javax.swing.JFrame {
 
             }
         ));
+        tablaBuscarClase.setComponentPopupMenu(jPopupMenu1);
         tablaBuscarClase.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tablaBuscarClase);
+
+        jLabel2.setText("Por Pagar");
+
+        tablaAsignar.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        tablaAsignar.setComponentPopupMenu(jPopupMenu2);
+        tablaAsignar.getTableHeader().setReorderingAllowed(false);
+        jScrollPane3.setViewportView(tablaAsignar);
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setText("Total a Pagar: ");
+
+        txtTotal.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        txtTotal.setForeground(new java.awt.Color(255, 51, 51));
+        txtTotal.setEnabled(false);
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel6.setText("Cantidad");
+
+        lblCambio.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblCambio.setText("Cambio");
+
+        txtCambio.setEnabled(false);
+
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(lblCambio))
+                        .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblBuscarCliente)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtBuscarCliente))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblBuscarClase)
-                                .addGap(18, 18, 18)
-                                .addComponent(cmbDias, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnBuscarCliente)
-                            .addComponent(btnBuscarClase)))
+                            .addComponent(txtCambio, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                            .addComponent(txtTotal)
+                            .addComponent(txtCantidad)))
+                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(123, 123, 123)
+                        .addComponent(btnGuardar))
+                    .addComponent(jLabel2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addComponent(lblFolio)
+                                .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtFolio, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(172, 172, 172)
-                                .addComponent(lblHora))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(txtCliente))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(53, 53, 53)
+                        .addComponent(btnBuscarCliente))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblFolio)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtFolio, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(172, 172, 172)
+                        .addComponent(lblHora)
+                        .addGap(52, 52, 52)
+                        .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,76 +275,240 @@ public class RegistrarPago extends javax.swing.JFrame {
                     .addComponent(lblFolio)
                     .addComponent(txtFolio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblHora)
-                    .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblBuscarCliente)
+                    .addComponent(jLabel4)
                     .addComponent(txtBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscarCliente))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblBuscarClase)
-                    .addComponent(btnBuscarClase)
-                    .addComponent(cmbDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(248, 248, 248))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(22, 22, 22)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addComponent(lblCambio))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(txtCambio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardar))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnBuscarClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClaseActionPerformed
-        // TODO add your handling code here:
-        
-        int filas=tablaBuscarClase.getRowCount();
-            for (int i = 0;filas>i; i++) {
-                modelo.removeRow(0);
-            }
-        try 
-        {            
-            int aux=cmbDias.getSelectedIndex();
-            String [] datos =new String [6];
-            ConexionMySQL conexion = new ConexionMySQL();
-            conexion.MySQLConnection();
-            Statement st = Conexion.createStatement();
-            ResultSet rs = st.executeQuery("Select"
-                    + " c.idclase as id,"
-                    + " c.IdInstructor as inst,"
-                    + " c.HoraInicio as inicio,"
-                    + " c.HoraFinal as fin, "
-                    + " c.Precio as p,"
-                    + " c.Cupo as cup"
-                    + " from clasedia as d"
-                    + " right Join  clase as c ON d.IdClase=c.idclase"
-                    + " where dia="+(aux+2));
-            while(rs.next())
-            {
-                datos[0]=""+rs.getInt("id");
-                datos[1]=rs.getString("inst");
-                datos[2]=rs.getString("inicio");
-                datos[3]=rs.getString("fin");
-                datos[4]=rs.getString("p");
-                datos[5]=rs.getString("cup");
-                modelo.addRow(datos); 
-            }
-                rs.close();
-                conexion.closeConnection();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(rootPane, ex, null, WIDTH);
-        }
-    }//GEN-LAST:event_btnBuscarClaseActionPerformed
-
     private void btnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClienteActionPerformed
         // TODO add your handling code here:
-        
+        limpiarClase();
+        int contador = 0;
+        if (!txtBuscarCliente.getText().matches("^\\s*$")) {
+            String[] datos = new String[7];
+            try {
+                ConexionMySQL conexion = new ConexionMySQL();
+                conexion.MySQLConnection();
+                Statement st = Conexion.createStatement();
+                ResultSet rs = st.executeQuery("Select"
+                        + " c.idclase as id,"
+                        + " c.IdInstructor as inst,"
+                        + " c.HoraInicio as inicio,"
+                        + " c.HoraFinal as fin, "
+                        + " c.Precio as p,"
+                        + " c.Cupo as cup, "
+                        + "c.disponibles as dis"
+                        + " from clienteclase as d"
+                        + " INNER Join  clase as c ON d.IdClase=c.idclase where d.idcliente=" + txtBuscarCliente.getText());
+                while (rs.next()) {
+                    if (contador == 0) {
+                        txtCliente.setText(txtBuscarCliente.getText());
+                    }
+                    datos[0] = "" + rs.getInt("id");
+                    datos[1] = rs.getString("inst");
+                    datos[2] = rs.getString("inicio");
+                    datos[3] = rs.getString("fin");
+                    datos[4] = rs.getString("p");
+                    datos[5] = rs.getString("cup");
+                    datos[6] = rs.getString("dis");
+                    modelo.addRow(datos);
+                    contador++;
+                }
+                if (contador == 0) {
+                    txtCliente.setText("");
+                }
+
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(rootPane, ex);
+            }
+        }
     }//GEN-LAST:event_btnBuscarClienteActionPerformed
+
+    //Agregar
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        int filas = tablaAsignar.getRowCount();
+        int encontro = 0;
+        if (filas > 0) {
+            for (int i = 0; filas > i; i++) {
+                String aux = asignar.getValueAt(i, 0).toString();
+                if (aux.equals(modelo.getValueAt(tablaBuscarClase.getSelectedRow(), 0))) {
+                    encontro = 1;
+                    JOptionPane.showMessageDialog(rootPane, "Ya esta en tu asignacion");
+                    break;
+                }
+            }
+        }
+
+        if (encontro == 0) {
+            String[] fila = new String[7];
+            for (int i = 0; i < tablaBuscarClase.getColumnCount(); i++) {
+                fila[i] = (String) modelo.getValueAt(tablaBuscarClase.getSelectedRow(), i);
+            }
+            String aux = (modelo.getValueAt(tablaBuscarClase.getSelectedRow(), 4).toString());
+            total += Double.parseDouble(aux);
+            txtTotal.setText("" + total);
+            asignar.addRow(fila);
+            modelo.removeRow(tablaBuscarClase.getSelectedRow());
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        int filas = tablaAsignar.getRowCount();
+        if (filas > 0) {
+            String[] fila = new String[7];
+            for (int i = 0; i < tablaAsignar.getColumnCount(); i++) {
+                fila[i] = (String) asignar.getValueAt(tablaAsignar.getSelectedRow(), i);
+            }
+            String aux = (asignar.getValueAt(tablaAsignar.getSelectedRow(), 4).toString());
+            total -= Double.parseDouble(aux);
+            txtTotal.setText("" + total);
+
+            modelo.addRow(fila);
+            asignar.removeRow(tablaAsignar.getSelectedRow());
+
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    public void limpiarAsignar()
+    {
+        int filas=tablaAsignar.getRowCount();
+        for (int i = 0;filas>i; i++) 
+        {
+            asignar.removeRow(0);
+        }
+    }
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+        total=0;
+        obtenerFolio();
+        int correcto = 1;
+        if (txtCliente.getText().matches("^\\s*$")) {
+            JOptionPane.showMessageDialog(rootPane, "Por favor ingrese el id");
+        } else {
+            if (txtCantidad.getText().matches("^\\s*$")) 
+            {
+                JOptionPane.showMessageDialog(rootPane, "Por favor ingrese la  cantidad");
+            } 
+            else 
+            {
+                try 
+                {
+                    if (Double.parseDouble(txtCantidad.getText()) >= Double.parseDouble(txtTotal.getText())) 
+                    {
+                        Double resul = Double.parseDouble(txtCantidad.getText()) - Double.parseDouble(txtTotal.getText());
+                        txtCambio.setText(resul.toString());
+                        ConexionMySQL conexion = new ConexionMySQL();
+                        conexion.MySQLConnection();
+                        Statement st = Conexion.createStatement();
+                        int filas = tablaAsignar.getRowCount();
+                        if (filas > 0) 
+                        {
+                            ResultSet rs = st.executeQuery("Select *from pago "
+                                        + "where "
+                                        + "DATEDIFF(now(),(Select max(Fecha)from pago where idCliente=1)) >1");
+                                if (rs.next()) 
+                                {
+                                    String q = "INSERT INTO pago"
+                                            + " (folio, fecha, idcliente)"
+                                            + " VALUES"
+                                            + "(" + txtFolio.getText() + ","
+                                            + " (select NOW()), "
+                                            + " " + txtCliente.getText() + ")";
+                                    st.executeUpdate(q);
+                                    for (int i = 0; filas > i; i++) 
+                                    {
+                                        String u = "INSERT INTO pagodetalle"
+                                                + " (folio,"
+                                                + " tipodepago,"/*0 para clase normal*/
+                                                + " idclase,"
+                                                + "cantidad)"
+                                                + " VALUES"
+                                                + "(" + txtFolio.getText() + ","
+                                                + " " + 0 + ", "
+                                                + " " + asignar.getValueAt(i, 0) + ","
+                                                + " " + asignar.getValueAt(i, 4) + ")";
+                                        st.executeUpdate(u);
+                                    }
+                                }
+                                else
+                                {
+                                    correcto=0;
+                                    JOptionPane.showMessageDialog(rootPane, "Intenta registrar un pago con una diferencia menor de 1 dia");
+                                }
+                            }
+
+                        if (correcto == 1) 
+                        {
+                            JOptionPane.showMessageDialog(rootPane, "Se registraron correctamente todas las clases");
+                        }
+
+                        txtCliente.setText("");
+                        limpiarClase();
+                        limpiarAsignar();
+                        txtCantidad.setText("");
+                        txtTotal.setText("");
+                        txtCambio.setText("");
+                        obtenerFolio();
+                    }
+                    else
+                    {
+                       JOptionPane.showMessageDialog(rootPane, "Error ingrese una cantidad suficiente o elimine una clase");
+                         
+                    }
+
+                } catch (SQLException ex) 
+                {
+                    JOptionPane.showMessageDialog(rootPane, ex);
+                }
+            }
+        }
+
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    public void limpiarClase() {
+        int filas = tablaBuscarClase.getRowCount();
+        for (int i = 0; filas > i; i++) {
+            modelo.removeRow(0);
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -316,19 +546,31 @@ public class RegistrarPago extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscarClase;
     private javax.swing.JButton btnBuscarCliente;
-    private javax.swing.JComboBox cmbDias;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel lblBuscarClase;
-    private javax.swing.JLabel lblBuscarCliente;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblCambio;
     private javax.swing.JLabel lblFolio;
     private javax.swing.JLabel lblHora;
+    private javax.swing.JTable tablaAsignar;
     private javax.swing.JTable tablaBuscarClase;
-    private javax.swing.JTable tablaBuscarCliente;
     private javax.swing.JTextField txtBuscarCliente;
+    private javax.swing.JTextField txtCambio;
+    private javax.swing.JTextField txtCantidad;
+    private javax.swing.JTextField txtCliente;
     private javax.swing.JTextField txtFolio;
     private javax.swing.JTextField txtHora;
+    private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 }
