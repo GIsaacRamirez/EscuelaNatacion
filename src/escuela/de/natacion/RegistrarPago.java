@@ -12,13 +12,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Guillermo
  */
 public class RegistrarPago extends javax.swing.JFrame {
-
+    DefaultTableModel modelo;
+   
     public void obtenerFolio()
     {
         try 
@@ -72,8 +75,18 @@ public class RegistrarPago extends javax.swing.JFrame {
         initComponents();
         obtenerFolio();  
         obtenerFecha();
+         modelo=(DefaultTableModel) tablaBuscarCliente.getModel();
+        modelo.addColumn("IdClase");
+        modelo.addColumn("Instructor");
+        modelo.addColumn("Inicio");
+        modelo.addColumn("Fin");
+        modelo.addColumn("Precio");
+        modelo.addColumn("Cupo");
+        
     }
-
+    
+        
+        
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -92,7 +105,11 @@ public class RegistrarPago extends javax.swing.JFrame {
         btnBuscarCliente = new javax.swing.JButton();
         btnBuscarClase = new javax.swing.JButton();
         lblBuscarClase = new javax.swing.JLabel();
-        txtBuscarClase = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaBuscarCliente = new javax.swing.JTable();
+        cmbDias = new javax.swing.JComboBox();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaBuscarClase = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,39 +124,82 @@ public class RegistrarPago extends javax.swing.JFrame {
         lblBuscarCliente.setText("Buscar por cliente");
 
         btnBuscarCliente.setText("Buscar Cliente");
+        btnBuscarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarClienteActionPerformed(evt);
+            }
+        });
 
         btnBuscarClase.setText("Buscar Clase");
+        btnBuscarClase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarClaseActionPerformed(evt);
+            }
+        });
 
         lblBuscarClase.setText("Buscar por clase");
+
+        tablaBuscarCliente.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tablaBuscarCliente);
+
+        cmbDias.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" }));
+
+        tablaBuscarClase.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        tablaBuscarClase.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(tablaBuscarClase);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblBuscarClase)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtBuscarClase, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnBuscarClase))
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblBuscarCliente)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtBuscarCliente))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblBuscarClase)
+                                .addGap(18, 18, 18)
+                                .addComponent(cmbDias, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnBuscarCliente)
+                            .addComponent(btnBuscarClase)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblBuscarCliente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnBuscarCliente))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblFolio)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtFolio, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(172, 172, 172)
-                        .addComponent(lblHora)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(118, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(lblFolio)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtFolio, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(172, 172, 172)
+                                .addComponent(lblHora))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,21 +210,77 @@ public class RegistrarPago extends javax.swing.JFrame {
                     .addComponent(txtFolio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblHora)
                     .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblBuscarCliente)
                     .addComponent(txtBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscarCliente))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblBuscarClase)
-                    .addComponent(txtBuscarClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarClase))
-                .addContainerGap(304, Short.MAX_VALUE))
+                    .addComponent(btnBuscarClase)
+                    .addComponent(cmbDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(248, 248, 248))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBuscarClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClaseActionPerformed
+        // TODO add your handling code here:
+        for(int i=modelo.getRowCount();i>0;i--)
+        {
+             modelo.removeRow(i);
+        }
+       
+
+        try 
+        {            
+            int aux=cmbDias.getSelectedIndex();
+            String [] datos =new String [6];
+            ConexionMySQL conexion = new ConexionMySQL();
+            conexion.MySQLConnection();
+            Statement st = Conexion.createStatement();
+            ResultSet rs = st.executeQuery("Select"
+                    + " c.idclase as id,"
+                    + " c.IdInstructor as inst,"
+                    + " c.HoraInicio as inicio,"
+                    + " c.HoraFinal as fin, "
+                    + " c.Precio as p,"
+                    + " c.Cupo as cup"
+                    + " from clasedia as d"
+                    + " right Join  clase as c ON d.IdClase=c.idclase"
+                    + " where dia="+(aux+2));
+            while(rs.next())
+            {
+                datos[0]=""+rs.getInt("id");
+                datos[1]=rs.getString("inst");
+                datos[2]=rs.getString("inicio");
+                datos[3]=rs.getString("fin");
+                datos[4]=rs.getString("p");
+                datos[5]=rs.getString("cup");
+                modelo.addRow(datos); 
+            }
+                rs.close();
+                conexion.closeConnection();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex, null, WIDTH);
+        }
+    }//GEN-LAST:event_btnBuscarClaseActionPerformed
+
+    private void btnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClienteActionPerformed
+        // TODO add your handling code here:
+        tablaBuscarCliente.setVisible(true);
+        tablaBuscarCliente.removeAll();
+    }//GEN-LAST:event_btnBuscarClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -204,11 +320,15 @@ public class RegistrarPago extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarClase;
     private javax.swing.JButton btnBuscarCliente;
+    private javax.swing.JComboBox cmbDias;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblBuscarClase;
     private javax.swing.JLabel lblBuscarCliente;
     private javax.swing.JLabel lblFolio;
     private javax.swing.JLabel lblHora;
-    private javax.swing.JTextField txtBuscarClase;
+    private javax.swing.JTable tablaBuscarClase;
+    private javax.swing.JTable tablaBuscarCliente;
     private javax.swing.JTextField txtBuscarCliente;
     private javax.swing.JTextField txtFolio;
     private javax.swing.JTextField txtHora;

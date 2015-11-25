@@ -181,6 +181,11 @@ public class Menu extends javax.swing.JFrame {
         MenuPago.setText("Pago");
 
         MenuRegistrarPago.setText("Registrar Pago");
+        MenuRegistrarPago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuRegistrarPagoActionPerformed(evt);
+            }
+        });
         MenuPago.add(MenuRegistrarPago);
 
         jMenuBar1.add(MenuPago);
@@ -275,6 +280,12 @@ public class Menu extends javax.swing.JFrame {
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void MenuRegistrarPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuRegistrarPagoActionPerformed
+        // TODO add your handling code here:
+        RegistrarPago pago=new RegistrarPago();
+        pago.setVisible(true);
+    }//GEN-LAST:event_MenuRegistrarPagoActionPerformed
 
     /**
      * @param args the command line arguments
