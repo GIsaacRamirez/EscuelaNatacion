@@ -64,6 +64,8 @@ public class MostrarClases extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
+        setTitle("Todas las clases");
+
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

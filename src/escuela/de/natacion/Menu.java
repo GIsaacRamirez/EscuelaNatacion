@@ -285,6 +285,8 @@ public class Menu extends javax.swing.JFrame {
 
     private void MenuEliminarClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuEliminarClaseActionPerformed
         // TODO add your handling code here:
+        EliminarClase ec=new EliminarClase();
+        ec.setVisible(true);
     }//GEN-LAST:event_MenuEliminarClaseActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
