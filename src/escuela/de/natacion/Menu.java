@@ -51,6 +51,7 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         MenuPago = new javax.swing.JMenu();
         MenuRegistrarPago = new javax.swing.JMenuItem();
+        MenuBuscarFolio = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -216,6 +217,14 @@ public class Menu extends javax.swing.JFrame {
         });
         MenuPago.add(MenuRegistrarPago);
 
+        MenuBuscarFolio.setText("Buscar con Folio el Pago");
+        MenuBuscarFolio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuBuscarFolioActionPerformed(evt);
+            }
+        });
+        MenuPago.add(MenuBuscarFolio);
+
         jMenuBar1.add(MenuPago);
 
         setJMenuBar(jMenuBar1);
@@ -343,6 +352,12 @@ public class Menu extends javax.swing.JFrame {
         c.setVisible(true);
     }//GEN-LAST:event_MenuBajaClaseClienteActionPerformed
 
+    private void MenuBuscarFolioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuBuscarFolioActionPerformed
+        // TODO add your handling code here:
+        BuscarPago bpago=new BuscarPago();
+        bpago.setVisible(true);
+    }//GEN-LAST:event_MenuBuscarFolioActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -386,6 +401,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem MenuBuscarClase;
     private javax.swing.JMenuItem MenuBuscarCliente;
     private javax.swing.JMenuItem MenuBuscarEmpleado;
+    private javax.swing.JMenuItem MenuBuscarFolio;
     private javax.swing.JMenu MenuClase;
     private javax.swing.JMenu MenuClientes;
     private javax.swing.JMenuItem MenuEliminarClase;
