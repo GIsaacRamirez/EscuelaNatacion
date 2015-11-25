@@ -40,8 +40,9 @@ public class Menu extends javax.swing.JFrame {
         MenuModificarCliente = new javax.swing.JMenuItem();
         MenuBuscarCliente = new javax.swing.JMenuItem();
         MenuEliminarCliente = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
         MenuMostrarClientes = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        MenuBajaClaseCliente = new javax.swing.JMenuItem();
         MenuClase = new javax.swing.JMenu();
         MenuAgregarClase = new javax.swing.JMenuItem();
         MenuBuscarClase = new javax.swing.JMenuItem();
@@ -135,6 +136,14 @@ public class Menu extends javax.swing.JFrame {
         });
         MenuClientes.add(MenuEliminarCliente);
 
+        MenuMostrarClientes.setText("Mostrar Clientes");
+        MenuMostrarClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuMostrarClientesActionPerformed(evt);
+            }
+        });
+        MenuClientes.add(MenuMostrarClientes);
+
         jMenuItem5.setText("Asignar a clase");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,13 +152,13 @@ public class Menu extends javax.swing.JFrame {
         });
         MenuClientes.add(jMenuItem5);
 
-        MenuMostrarClientes.setText("Mostrar Clientes");
-        MenuMostrarClientes.addActionListener(new java.awt.event.ActionListener() {
+        MenuBajaClaseCliente.setText("Baja de Clase");
+        MenuBajaClaseCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuMostrarClientesActionPerformed(evt);
+                MenuBajaClaseClienteActionPerformed(evt);
             }
         });
-        MenuClientes.add(MenuMostrarClientes);
+        MenuClientes.add(MenuBajaClaseCliente);
 
         jMenuBar1.add(MenuClientes);
 
@@ -300,6 +309,8 @@ public class Menu extends javax.swing.JFrame {
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
+        AsignarClase_a_Cliente aCC=new AsignarClase_a_Cliente();
+        aCC.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void MenuRegistrarPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuRegistrarPagoActionPerformed
@@ -325,6 +336,12 @@ public class Menu extends javax.swing.JFrame {
         ModificarClase mc= new ModificarClase();
         mc.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void MenuBajaClaseClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuBajaClaseClienteActionPerformed
+        // TODO add your handling code here:
+        EliminarClaseCliente c=new EliminarClaseCliente();
+        c.setVisible(true);
+    }//GEN-LAST:event_MenuBajaClaseClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -365,6 +382,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem MenuAgregarClase;
     private javax.swing.JMenuItem MenuAgregarCliente;
     private javax.swing.JMenuItem MenuBajaAltaEmpleado;
+    private javax.swing.JMenuItem MenuBajaClaseCliente;
     private javax.swing.JMenuItem MenuBuscarClase;
     private javax.swing.JMenuItem MenuBuscarCliente;
     private javax.swing.JMenuItem MenuBuscarEmpleado;

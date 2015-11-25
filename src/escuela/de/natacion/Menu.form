@@ -100,6 +100,14 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuEliminarClienteActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="MenuMostrarClientes">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Mostrar Clientes"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuMostrarClientesActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Asignar a clase"/>
@@ -108,12 +116,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem5ActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="MenuMostrarClientes">
+            <MenuItem class="javax.swing.JMenuItem" name="MenuBajaClaseCliente">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Mostrar Clientes"/>
+                <Property name="text" type="java.lang.String" value="Baja de Clase"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuMostrarClientesActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuBajaClaseClienteActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

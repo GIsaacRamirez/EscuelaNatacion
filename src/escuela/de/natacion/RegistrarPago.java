@@ -148,13 +148,11 @@ public class RegistrarPago extends javax.swing.JFrame {
 
         txtFolio.setEditable(false);
         txtFolio.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        txtFolio.setEnabled(false);
 
         lblHora.setText("Hora:");
 
         txtHora.setEditable(false);
         txtHora.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtHora.setEnabled(false);
 
         txtCliente.setEditable(false);
         txtCliente.setEnabled(false);

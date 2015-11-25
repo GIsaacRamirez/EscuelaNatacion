@@ -15,13 +15,14 @@ public class ConexionMySQL {
  
     public static Connection Conexion;
     String user="root";
-    String pass="Rigo1994";
+    //String pass="Rigo1994";
+    String pass="";
     public void MySQLConnection() {
         try 
         {
             Class.forName("com.mysql.jdbc.Driver");
             Conexion = DriverManager.getConnection("jdbc:mysql://localhost/escuelanatacion", user, pass);
-            System.out.println("Se ha iniciado la conexión con el servidor de forma exitosa");
+            //System.out.println("Se ha iniciado la conexión con el servidor de forma exitosa");
         } 
         catch (ClassNotFoundException | SQLException ex) 
         {
@@ -33,7 +34,7 @@ public class ConexionMySQL {
     {
         try {
             Conexion.close();
-            System.out.println("Se ha finalizado la conexión con el servidor");
+            //System.out.println("Se ha finalizado la conexión con el servidor");
         } catch (SQLException ex) {
             Logger.getLogger(ConexionMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
