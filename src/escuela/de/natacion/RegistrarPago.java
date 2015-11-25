@@ -75,7 +75,7 @@ public class RegistrarPago extends javax.swing.JFrame {
         initComponents();
         obtenerFolio();  
         obtenerFecha();
-         modelo=(DefaultTableModel) tablaBuscarCliente.getModel();
+         modelo=(DefaultTableModel) tablaBuscarClase.getModel();
         modelo.addColumn("IdClase");
         modelo.addColumn("Instructor");
         modelo.addColumn("Inicio");
@@ -236,12 +236,11 @@ public class RegistrarPago extends javax.swing.JFrame {
 
     private void btnBuscarClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClaseActionPerformed
         // TODO add your handling code here:
-        for(int i=modelo.getRowCount();i>0;i--)
-        {
-             modelo.removeRow(i);
-        }
-       
-
+        
+        int filas=tablaBuscarClase.getRowCount();
+            for (int i = 0;filas>i; i++) {
+                modelo.removeRow(0);
+            }
         try 
         {            
             int aux=cmbDias.getSelectedIndex();
@@ -278,8 +277,7 @@ public class RegistrarPago extends javax.swing.JFrame {
 
     private void btnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClienteActionPerformed
         // TODO add your handling code here:
-        tablaBuscarCliente.setVisible(true);
-        tablaBuscarCliente.removeAll();
+        
     }//GEN-LAST:event_btnBuscarClienteActionPerformed
 
     /**
