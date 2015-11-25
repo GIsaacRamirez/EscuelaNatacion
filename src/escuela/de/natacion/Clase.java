@@ -140,32 +140,32 @@ public class Clase extends javax.swing.JFrame {
                 */
                 if(checkLunes.isSelected())
                 {
-                    String QueryDias="INSERT INTO clasedia (IdClase,Dia)VALUES ("+IdClase+","+2+")";  
+                    String QueryDias="INSERT INTO claseDia (IdClase,Dia)VALUES ("+IdClase+","+2+")";  
                     st.executeUpdate(QueryDias);
                 }
                 if(checkMartes.isSelected())
                 {
-                    String QueryDias="INSERT INTO clasedia (IdClase,Dia)VALUES ("+IdClase+","+3+")";  
+                    String QueryDias="INSERT INTO claseDia (IdClase,Dia)VALUES ("+IdClase+","+3+")";  
                     st.executeUpdate(QueryDias);
                 }
                 if(checkMiercoles.isSelected())
                 {
-                    String QueryDias="INSERT INTO clasedia (IdClase,Dia)VALUES ("+IdClase+","+4+")";  
+                    String QueryDias="INSERT INTO claseDia (IdClase,Dia)VALUES ("+IdClase+","+4+")";  
                     st.executeUpdate(QueryDias);
                 }
                 if(checkJueves.isSelected())
                 {
-                    String QueryDias="INSERT INTO clasedia (IdClase,Dia)VALUES ("+IdClase+","+5+")";  
+                    String QueryDias="INSERT INTO claseDia (IdClase,Dia)VALUES ("+IdClase+","+5+")";  
                     st.executeUpdate(QueryDias);
                 }
                 if(checkViernes.isSelected())
                 {
-                    String QueryDias="INSERT INTO clasedia (IdClase,Dia)VALUES ("+IdClase+","+6+")";  
+                    String QueryDias="INSERT INTO claseDia (IdClase,Dia)VALUES ("+IdClase+","+6+")";  
                     st.executeUpdate(QueryDias);
                 }
                 if(checkSabado.isSelected())
                 {
-                    String QueryDias="INSERT INTO clasedia (IdClase,Dia)VALUES ("+IdClase+","+7+")";  
+                    String QueryDias="INSERT INTO claseDia (IdClase,Dia)VALUES ("+IdClase+","+7+")";  
                     st.executeUpdate(QueryDias);
                 }
                 mysql.closeConnection();
