@@ -198,7 +198,7 @@ public class BuscarClase extends javax.swing.JFrame {
                 ConexionMySQL conexion = new ConexionMySQL();
                 conexion.MySQLConnection();
                 Statement st = Conexion.createStatement();
-                ResultSet rs = st.executeQuery("SELECT c.IdClase FROM clase as c INNER JOIN claseDia as cd ON c.IdClase=cd.IdClase WHERE Dia='"+dia+"'");
+                ResultSet rs = st.executeQuery("SELECT c.IdClase FROM clase as c INNER JOIN clasedia as cd ON c.IdClase=cd.IdClase WHERE Dia='"+dia+"'");
                 while(rs.next())
                 {
                     int id= rs.getInt("IdClase");
@@ -231,7 +231,7 @@ public class BuscarClase extends javax.swing.JFrame {
                 ConexionMySQL conexion = new ConexionMySQL();
                 conexion.MySQLConnection();
                 Statement st = Conexion.createStatement();
-                ResultSet rs = st.executeQuery("SELECT c.IdClase FROM clase as c INNER JOIN claseDia as cd ON c.IdClase=cd.IdClase WHERE Dia='"+dia+"'");
+                ResultSet rs = st.executeQuery("SELECT c.IdClase FROM clase as c INNER JOIN clasedia as cd ON c.IdClase=cd.IdClase WHERE Dia='"+dia+"'");
                 while(rs.next())
                 {
                     int id= rs.getInt("IdClase");
