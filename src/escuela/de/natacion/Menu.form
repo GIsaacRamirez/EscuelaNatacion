@@ -143,6 +143,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Mostrar todas"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuMostrarClasesActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="MenuEliminarClase">
               <Properties>
