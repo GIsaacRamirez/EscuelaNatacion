@@ -31,14 +31,22 @@ public class Clase extends javax.swing.JFrame {
         muestraInstructores();
     }
     public boolean obtenDatos(){
+        
         GeneraIdClase();
-        StringTokenizer tkn=new StringTokenizer(",",jComboBox2.getSelectedItem().toString());
-        IdInstructor=tkn.nextToken();
-        HoraInicio=jComboBox3.getSelectedItem().toString();
-        HoraFinal=jComboBox4.getSelectedItem().toString();
-        Precio=jTextField1.getText();
-        Cupo=jComboBox5.getSelectedItem().toString();
-       return true;
+        IdInstructor=cmbInstructor.getSelectedItem().toString().substring(0,cmbInstructor.getSelectedItem().toString().indexOf(",") );
+        //IdInstructor=tkn.nextToken();
+        HoraInicio=cmbHoraInicio.getSelectedItem().toString();
+        String aux=HoraInicio.substring(0,HoraInicio.indexOf(":"));
+        HoraInicio=aux+""+HoraInicio.substring(HoraInicio.indexOf(":")+1,HoraInicio.length())+"00";
+        
+        
+        HoraFinal=cmbHoraFinal.getSelectedItem().toString();
+        String auxFin=HoraFinal.substring(0,HoraFinal.indexOf(":"));
+        HoraFinal=auxFin+""+HoraFinal.substring(HoraFinal.indexOf(":")+1,HoraFinal.length())+"00";
+        Precio=txtPrecio.getText();
+        Cupo=cmbCupo.getSelectedItem().toString();
+
+        return true;
    }
     
     public void GeneraIdClase()
@@ -60,7 +68,7 @@ public class Clase extends javax.swing.JFrame {
             }
             catch (SQLException ex)
             {
-
+                JOptionPane.showMessageDialog(rootPane, ex);
             }
    }
     
@@ -78,7 +86,7 @@ public class Clase extends javax.swing.JFrame {
                 {
                     int id= rs.getInt("IdEmpleado");
                     String nombre=rs.getString("Nombre");
-                    jComboBox2.addItem(Integer.toString(id)+","+nombre);
+                    cmbInstructor.addItem(Integer.toString(id)+","+nombre);
                 }
                 rs.close();
                 conexion.closeConnection();
@@ -86,7 +94,7 @@ public class Clase extends javax.swing.JFrame {
             }
             catch (SQLException ex)
             {
-
+                JOptionPane.showMessageDialog(rootPane, ex);
             }
    }
    
@@ -98,13 +106,13 @@ public class Clase extends javax.swing.JFrame {
             {
                 ConexionMySQL mysql = new ConexionMySQL();
                 mysql.MySQLConnection();
-                String Query = "INSERT INTO empleado "
+                String Query = "INSERT INTO clase "
                     + "(IdClase,"
                     + "IdInstructor,"
                     + "HoraInicio,"
                     + "HoraFinal,"
                     + "Precio,"
-                    + "Cupo,) "
+                    + "Cupo) "
                     + "VALUES "
                     + "("+IdClase+","
                     + ""+IdInstructor+","
@@ -112,9 +120,50 @@ public class Clase extends javax.swing.JFrame {
                     + "'"+HoraFinal+"',"
                     + ""+Precio+","
                     + ""+Cupo+")";
-            
+                
+                
+                
                 Statement st = Conexion.createStatement();
                 st.executeUpdate(Query);
+                /*
+                    Dias
+                    Lunes=2
+                    Martes=3
+                    Miercoles=4
+                    Jueves=5
+                    Viernes=6
+                    Sabado=7
+                */
+                if(checkLunes.isSelected())
+                {
+                    String QueryDias="INSERT INTO clasedia (IdClase,Dia)VALUES ("+IdClase+","+2+")";  
+                    st.executeUpdate(QueryDias);
+                }
+                if(checkMartes.isSelected())
+                {
+                    String QueryDias="INSERT INTO clasedia (IdClase,Dia)VALUES ("+IdClase+","+3+")";  
+                    st.executeUpdate(QueryDias);
+                }
+                if(checkMiercoles.isSelected())
+                {
+                    String QueryDias="INSERT INTO clasedia (IdClase,Dia)VALUES ("+IdClase+","+4+")";  
+                    st.executeUpdate(QueryDias);
+                }
+                if(checkJueves.isSelected())
+                {
+                    String QueryDias="INSERT INTO clasedia (IdClase,Dia)VALUES ("+IdClase+","+5+")";  
+                    st.executeUpdate(QueryDias);
+                }
+                if(checkViernes.isSelected())
+                {
+                    String QueryDias="INSERT INTO clasedia (IdClase,Dia)VALUES ("+IdClase+","+6+")";  
+                    st.executeUpdate(QueryDias);
+                }
+                if(checkSabado.isSelected())
+                {
+                    String QueryDias="INSERT INTO clasedia (IdClase,Dia)VALUES ("+IdClase+","+7+")";  
+                    st.executeUpdate(QueryDias);
+                }
                 mysql.closeConnection();
                 JOptionPane.showMessageDialog(null, "Clase registrada");
             }
@@ -142,23 +191,23 @@ public class Clase extends javax.swing.JFrame {
 
         jComboBox1 = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
+        cmbInstructor = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox();
+        cmbHoraInicio = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox();
+        cmbHoraFinal = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtPrecio = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox5 = new javax.swing.JComboBox();
+        cmbCupo = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jCheckBox5 = new javax.swing.JCheckBox();
-        jCheckBox6 = new javax.swing.JCheckBox();
+        checkLunes = new javax.swing.JCheckBox();
+        checkMartes = new javax.swing.JCheckBox();
+        checkMiercoles = new javax.swing.JCheckBox();
+        checkJueves = new javax.swing.JCheckBox();
+        checkViernes = new javax.swing.JCheckBox();
+        checkSabado = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -167,44 +216,44 @@ public class Clase extends javax.swing.JFrame {
 
         jLabel1.setText("Instructor:");
 
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        cmbInstructor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                cmbInstructorActionPerformed(evt);
             }
         });
 
         jLabel2.setText("Hora inicio");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00" }));
-        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+        cmbHoraInicio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00" }));
+        cmbHoraInicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox3ActionPerformed(evt);
+                cmbHoraInicioActionPerformed(evt);
             }
         });
 
         jLabel3.setText("Hora final");
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00" }));
-        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
+        cmbHoraFinal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00" }));
+        cmbHoraFinal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox4ActionPerformed(evt);
+                cmbHoraFinalActionPerformed(evt);
             }
         });
 
         jLabel4.setText("Precio:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtPrecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtPrecioActionPerformed(evt);
             }
         });
 
         jLabel5.setText("Cupo:");
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
-        jComboBox5.addActionListener(new java.awt.event.ActionListener() {
+        cmbCupo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
+        cmbCupo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox5ActionPerformed(evt);
+                cmbCupoActionPerformed(evt);
             }
         });
 
@@ -212,66 +261,71 @@ public class Clase extends javax.swing.JFrame {
 
         jLabel7.setText("Dias que se imparte la clase:");
 
-        jCheckBox1.setText("Lunes");
+        checkLunes.setText("Lunes");
 
-        jCheckBox2.setText("Martes");
+        checkMartes.setText("Martes");
 
-        jCheckBox3.setText("Miercoles");
+        checkMiercoles.setText("Miercoles");
 
-        jCheckBox4.setText("Jueves");
+        checkJueves.setText("Jueves");
 
-        jCheckBox5.setText("Viernes");
+        checkViernes.setText("Viernes");
 
-        jCheckBox6.setText("Sabado");
+        checkSabado.setText("Sabado");
 
         jButton1.setText("Agregar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cmbInstructor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbHoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cmbHoraFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel5)
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cmbCupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel6))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(7, 7, 7)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jCheckBox1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox4))
+                                .addComponent(checkLunes)
+                                .addGap(18, 18, 18)
+                                .addComponent(checkJueves))
                             .addComponent(jLabel7)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jCheckBox2)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(checkMiercoles)
+                                    .addComponent(checkMartes))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox5))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jCheckBox3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox6)))))
-                .addGap(0, 41, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(checkViernes)
+                                    .addComponent(checkSabado))))))
+                .addGap(0, 148, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
@@ -283,36 +337,36 @@ public class Clase extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbInstructor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbHoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbHoraFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbCupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox4))
+                    .addComponent(checkLunes)
+                    .addComponent(checkJueves))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox2)
-                    .addComponent(jCheckBox5))
+                    .addComponent(checkMartes)
+                    .addComponent(checkViernes))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox3)
-                    .addComponent(jCheckBox6))
+                    .addComponent(checkMiercoles)
+                    .addComponent(checkSabado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addContainerGap(15, Short.MAX_VALUE))
@@ -321,25 +375,32 @@ public class Clase extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void cmbInstructorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbInstructorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_cmbInstructorActionPerformed
 
-    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+    private void cmbHoraInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbHoraInicioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox3ActionPerformed
+    }//GEN-LAST:event_cmbHoraInicioActionPerformed
 
-    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
+    private void cmbHoraFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbHoraFinalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox4ActionPerformed
+    }//GEN-LAST:event_cmbHoraFinalActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtPrecioActionPerformed
 
-    private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
+    private void cmbCupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCupoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox5ActionPerformed
+    }//GEN-LAST:event_cmbCupoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        obtenDatos();
+        RegistraClase();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -377,18 +438,18 @@ public class Clase extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox checkJueves;
+    private javax.swing.JCheckBox checkLunes;
+    private javax.swing.JCheckBox checkMartes;
+    private javax.swing.JCheckBox checkMiercoles;
+    private javax.swing.JCheckBox checkSabado;
+    private javax.swing.JCheckBox checkViernes;
+    private javax.swing.JComboBox cmbCupo;
+    private javax.swing.JComboBox cmbHoraFinal;
+    private javax.swing.JComboBox cmbHoraInicio;
+    private javax.swing.JComboBox cmbInstructor;
     private javax.swing.JButton jButton1;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JCheckBox jCheckBox6;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
-    private javax.swing.JComboBox jComboBox4;
-    private javax.swing.JComboBox jComboBox5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -396,6 +457,6 @@ public class Clase extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
 }
