@@ -200,6 +200,7 @@ public class Empleado extends javax.swing.JFrame {
         cmbEstado = new javax.swing.JComboBox();
         lblTipoEmpleado = new javax.swing.JLabel();
         cmbPuestos = new javax.swing.JComboBox();
+        jCheckBox1 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -263,6 +264,8 @@ public class Empleado extends javax.swing.JFrame {
 
         lblTipoEmpleado.setText("Puesto:");
 
+        jCheckBox1.setText("Instructor");
+
         javax.swing.GroupLayout panelEmpleadoLayout = new javax.swing.GroupLayout(panelEmpleado);
         panelEmpleado.setLayout(panelEmpleadoLayout);
         panelEmpleadoLayout.setHorizontalGroup(
@@ -296,7 +299,7 @@ public class Empleado extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtEntidadEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btnBajaEmpleado))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCerrar))
                     .addGroup(panelEmpleadoLayout.createSequentialGroup()
                         .addComponent(lblEstado)
@@ -333,7 +336,10 @@ public class Empleado extends javax.swing.JFrame {
                                 .addComponent(txtColoniaEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panelEmpleadoLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(cmbPuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(cmbPuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEmpleadoLayout.createSequentialGroup()
+                        .addComponent(jCheckBox1)
+                        .addGap(146, 146, 146)))
                 .addContainerGap())
         );
         panelEmpleadoLayout.setVerticalGroup(
@@ -352,7 +358,8 @@ public class Empleado extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(panelEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblApellidoMaternoEmpleado)
-                    .addComponent(txtApellidoMaternoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtApellidoMaternoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox1))
                 .addGap(19, 19, 19)
                 .addGroup(panelEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombreEmpleado)
@@ -657,6 +664,7 @@ public class Empleado extends javax.swing.JFrame {
     private javax.swing.JButton btnModificarEmpleado1;
     private javax.swing.JComboBox cmbEstado;
     private javax.swing.JComboBox cmbPuestos;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblApellidoMaternoEmpleado;
     private javax.swing.JLabel lblApellidoPaternoEmpleado;

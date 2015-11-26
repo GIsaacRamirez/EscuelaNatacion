@@ -142,8 +142,6 @@ public class RegistrarPago extends javax.swing.JFrame {
         });
         jPopupMenu2.add(jMenuItem2);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         lblFolio.setText("Folio:");
 
         txtFolio.setEditable(false);
@@ -441,11 +439,11 @@ public class RegistrarPago extends javax.swing.JFrame {
                         {
                             ResultSet rs = st.executeQuery("Select *from pago "
                                         + "where "
-                                        + "DATEDIFF(now(),(Select max(Fecha)from pago where idCliente=1)) >1");
-                                if (rs.next()) 
+                                        + "DATEDIFF(now(),(Select max(Fecha)from pago where IdCliente=1)) >1");
+                                if (rs.next()==false) 
                                 {
                                     String q = "INSERT INTO pago"
-                                            + " (folio, fecha, idcliente)"
+                                            + " (Folio, Fecha, IdCliente)"
                                             + " VALUES"
                                             + "(" + txtFolio.getText() + ","
                                             + " (select NOW()), "
@@ -454,10 +452,10 @@ public class RegistrarPago extends javax.swing.JFrame {
                                     for (int i = 0; filas > i; i++) 
                                     {
                                         String u = "INSERT INTO pagodetalle"
-                                                + " (folio,"
-                                                + " tipodepago,"/*0 para clase normal*/
-                                                + " idclase,"
-                                                + "cantidad)"
+                                                + " (Folio,"
+                                                + " TipoDePago,"/*0 para clase normal*/
+                                                + " IdClase,"
+                                                + "Cantidad)"
                                                 + " VALUES"
                                                 + "(" + txtFolio.getText() + ","
                                                 + " " + 0 + ", "

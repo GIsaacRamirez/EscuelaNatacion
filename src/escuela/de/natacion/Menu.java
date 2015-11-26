@@ -52,6 +52,7 @@ public class Menu extends javax.swing.JFrame {
         MenuPago = new javax.swing.JMenu();
         MenuRegistrarPago = new javax.swing.JMenuItem();
         MenuBuscarFolio = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -225,6 +226,14 @@ public class Menu extends javax.swing.JFrame {
         });
         MenuPago.add(MenuBuscarFolio);
 
+        jMenuItem2.setText("Promocion");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        MenuPago.add(jMenuItem2);
+
         jMenuBar1.add(MenuPago);
 
         setJMenuBar(jMenuBar1);
@@ -358,6 +367,12 @@ public class Menu extends javax.swing.JFrame {
         bpago.setVisible(true);
     }//GEN-LAST:event_MenuBuscarFolioActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        Promocion a =new Promocion();
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -417,6 +432,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem SubMenuIngresarEmpleado;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem5;
     // End of variables declaration//GEN-END:variables
 }

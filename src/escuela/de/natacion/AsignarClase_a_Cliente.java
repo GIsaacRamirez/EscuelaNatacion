@@ -94,8 +94,6 @@ public class AsignarClase_a_Cliente extends javax.swing.JFrame {
         });
         jPopupMenu2.add(jMenuItem2);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         lblBuscarClase.setText("Buscar por clase");
 
         cmbDias.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" }));
@@ -389,12 +387,12 @@ public class AsignarClase_a_Cliente extends javax.swing.JFrame {
                             + " ' and idClase="+asignar.getValueAt(i,0));
                             if(!rs.next())
                             {
-                                String q="INSERT INTO clienteclase"
-                                + " (IdClase,IdCliente)"
+                                String q="INSERT INTO clienteclase(IdCliente,IdClase)"
+                                //+ " (IdClase,IdCliente)"
                                 + " VALUES"
-                                + "("+(asignar.getValueAt(i, 0))+","
+                                + "("+(asignar.getValueAt(i, 0).toString())+","
                                 + " "+txtCliente.getText()+")";
-                                
+                                System.out.println(q);
                                 st.executeUpdate(q);
                                 String u="UPDATE clase SET Disponibles=(Disponibles-1) "
                                 +" WHERE idclase="+asignar.getValueAt(i, 0);

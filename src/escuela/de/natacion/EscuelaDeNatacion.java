@@ -16,6 +16,7 @@ public class EscuelaDeNatacion {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+       
         Login v=new Login();
        v.setVisible(true);
     }
