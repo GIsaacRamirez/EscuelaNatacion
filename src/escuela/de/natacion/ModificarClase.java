@@ -100,6 +100,7 @@ public class ModificarClase extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jComboBox3 = new javax.swing.JComboBox();
         jCheckBox1 = new javax.swing.JCheckBox();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -168,6 +169,13 @@ public class ModificarClase extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setText("Buscar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -175,17 +183,6 @@ public class ModificarClase extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 282, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -210,16 +207,29 @@ public class ModificarClase extends javax.swing.JFrame {
                                 .addComponent(jLabel5)
                                 .addGap(3, 3, 3)
                                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 366, Short.MAX_VALUE)
                         .addComponent(jButton2)
                         .addGap(27, 27, 27)
                         .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1)))
+                        .addComponent(jTextField1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(jButton3)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -232,7 +242,8 @@ public class ModificarClase extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -267,31 +278,7 @@ public class ModificarClase extends javax.swing.JFrame {
 
     private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
         // TODO add your handling code here:
-        try
-        {
-
-            ConexionMySQL conexion = new ConexionMySQL();
-            conexion.MySQLConnection();
-            Statement st = Conexion.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM clase WHERE IdClase="+jComboBox2.getSelectedItem().toString()+"");
-            while(rs.next())
-            {
-                int id= rs.getInt("IdClase");
-                jTextField1.setText(this.nombreInstructor(Integer.toString(id)));
-                jTextField2.setText(rs.getTime("HoraInicio").toString());
-                jTextField3.setText(rs.getTime("HoraFinal").toString());
-                jTextField4.setText(rs.getString("Precio"));
-                jTextField5.setText(rs.getString("Cupo"));
-                jComboBox2.addItem(Integer.toString(id));
-            }
-            rs.close();
-            conexion.closeConnection();
-
-        }
-        catch (SQLException ex)
-        {
-            JOptionPane.showMessageDialog(rootPane, ex);
-        }
+        
     }//GEN-LAST:event_jComboBox2ItemStateChanged
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
@@ -329,6 +316,7 @@ public class ModificarClase extends javax.swing.JFrame {
 
     private void jComboBox1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboBox1FocusLost
         // TODO add your handling code here:
+        jComboBox2.removeAllItems();
         try
         {
             String dia="";
@@ -430,6 +418,35 @@ public class ModificarClase extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        try
+        {
+
+            ConexionMySQL conexion = new ConexionMySQL();
+            conexion.MySQLConnection();
+            Statement st = Conexion.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM clase WHERE IdClase="+jComboBox2.getSelectedItem().toString()+"");
+            while(rs.next())
+            {
+                int id= rs.getInt("IdClase");
+                jTextField1.setText(this.nombreInstructor(Integer.toString(id)));
+                jTextField2.setText(rs.getTime("HoraInicio").toString());
+                jTextField3.setText(rs.getTime("HoraFinal").toString());
+                jTextField4.setText(rs.getString("Precio"));
+                jTextField5.setText(rs.getString("Cupo"));
+                jComboBox2.addItem(Integer.toString(id));
+            }
+            rs.close();
+            conexion.closeConnection();
+
+        }
+        catch (SQLException ex)
+        {
+            JOptionPane.showMessageDialog(rootPane, ex);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -468,6 +485,7 @@ public class ModificarClase extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
