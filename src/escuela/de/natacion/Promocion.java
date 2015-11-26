@@ -139,7 +139,7 @@ public class Promocion extends javax.swing.JFrame {
             ConexionMySQL conexion = new ConexionMySQL();
             conexion.MySQLConnection();
             Statement st = Conexion.createStatement();
-            ResultSet rs = st.executeQuery("Select email  from cliente");
+            ResultSet rs = st.executeQuery("Select email  from cliente WHERE email<>NULL");
           
                 while(rs.next())
                 {
