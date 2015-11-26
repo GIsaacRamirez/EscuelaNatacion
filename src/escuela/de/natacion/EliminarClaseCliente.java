@@ -90,8 +90,6 @@ public class EliminarClaseCliente extends javax.swing.JFrame {
         });
         jPopupMenu2.add(jMenuItem2);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         jLabel2.setText("Por Eliminar");
 
         tablaAsignar.setModel(new javax.swing.table.DefaultTableModel(
