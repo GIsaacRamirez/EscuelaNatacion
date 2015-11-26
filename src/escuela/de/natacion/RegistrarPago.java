@@ -125,6 +125,9 @@ public class RegistrarPago extends javax.swing.JFrame {
         lblCambio = new javax.swing.JLabel();
         txtCambio = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         jMenuItem1.setText("Agregar a la cuenta");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -216,6 +219,15 @@ public class RegistrarPago extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setText("Codigo de promocion:");
+
+        jButton1.setText("Aplicar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -223,24 +235,6 @@ public class RegistrarPago extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(lblCambio))
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtCambio, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
-                            .addComponent(txtTotal)
-                            .addComponent(txtCantidad)))
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(123, 123, 123)
-                        .addComponent(btnGuardar))
-                    .addComponent(jLabel2)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -251,8 +245,27 @@ public class RegistrarPago extends javax.swing.JFrame {
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(53, 53, 53)
-                        .addComponent(btnBuscarCliente))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(53, 53, 53)
+                                .addComponent(btnBuscarCliente)
+                                .addGap(273, 273, 273)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtCambio, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                                    .addComponent(txtCantidad))
+                                .addContainerGap(77, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(291, 291, 291)
+                                .addComponent(jLabel5)
+                                .addGap(5, 5, 5)
+                                .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(123, 123, 123)
+                        .addComponent(btnGuardar))
+                    .addComponent(jLabel2)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblFolio)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -260,8 +273,19 @@ public class RegistrarPago extends javax.swing.JFrame {
                         .addGap(172, 172, 172)
                         .addComponent(lblHora)
                         .addGap(52, 52, 52)
-                        .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(81, Short.MAX_VALUE))
+                        .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(lblCambio)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton1))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,20 +301,28 @@ public class RegistrarPago extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(txtBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscarCliente))
-                .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addGap(22, 22, 22)
+                            .addComponent(jLabel7)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1))
+                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -307,7 +339,7 @@ public class RegistrarPago extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardar))
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
 
         pack();
@@ -357,6 +389,36 @@ public class RegistrarPago extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnBuscarClienteActionPerformed
 
+    public void BuscarPromo(){
+        
+        try
+            {
+                ConexionMySQL conexion = new ConexionMySQL();
+                conexion.MySQLConnection();
+                Statement st = Conexion.createStatement();
+                ResultSet rs = st.executeQuery("SELECT Porcentaje FROM promocion WHERE IdPromocion="+jTextField1.getText().toString());
+                while(rs.next())
+                {
+                    double descuento=rs.getDouble("Porcentaje");
+                    
+                    double total=Double.parseDouble(txtTotal.getText().toString());
+                    
+                    total=total-(total*(descuento*0.01));    
+                    if(total<0)
+                        txtTotal.setText("0");
+                    else
+                        txtTotal.setText(Double.toString(total).substring(0, Double.toString(total).indexOf(".")+2));
+                }
+                rs.close();
+                conexion.closeConnection();
+                
+            }
+            catch (SQLException ex)
+            {
+                JOptionPane.showMessageDialog(rootPane, ex);
+            }
+    }
+    
     //Agregar
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
@@ -499,6 +561,11 @@ public class RegistrarPago extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        BuscarPromo();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public void limpiarClase() {
         int filas = tablaBuscarClase.getRowCount();
         for (int i = 0; filas > i; i++) {
@@ -544,18 +611,21 @@ public class RegistrarPago extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarCliente;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblCambio;
     private javax.swing.JLabel lblFolio;
     private javax.swing.JLabel lblHora;
