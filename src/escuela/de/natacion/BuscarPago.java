@@ -63,8 +63,6 @@ DefaultTableModel modelo;
         jLabel5 = new javax.swing.JLabel();
         txtTotal = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         btnBuscarFolio.setText("Buscar Folio");
         btnBuscarFolio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

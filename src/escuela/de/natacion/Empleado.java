@@ -41,7 +41,7 @@ public class Empleado extends javax.swing.JFrame {
             ResultSet rs = st.executeQuery("Select *from Tipoempleado ORDER BY IdTipoEmpleado");
             while(rs.next())
             {
-                cmbPuestos.addItem(rs.getString("TipoEmpleado"));
+                //cmbPuestos.addItem(rs.getString("TipoEmpleado"));
             }
         } 
         catch (SQLException ex) 
@@ -86,7 +86,7 @@ public class Empleado extends javax.swing.JFrame {
     public Empleado()
     {
         initComponents();
-        CargarPuestos();
+        //CargarPuestos();
         this.btnBajaEmpleado.setVisible(false);
         this.btnModificarEmpleado1.setVisible(false);
         
@@ -99,7 +99,7 @@ public class Empleado extends javax.swing.JFrame {
     public Empleado(int id, int op)
     {
         initComponents();
-        CargarPuestos();
+        //CargarPuestos();
         this.btnIngresarEmpleado.setVisible(false);
         try 
         {
@@ -122,8 +122,13 @@ public class Empleado extends javax.swing.JFrame {
                 txtColoniaEmpleado.setText(rs.getString("Colonia"));
                 txtMunicipioEmpleado.setText(rs.getString("Municipio"));
                 txtEntidadEmpleado.setText(rs.getString("Entidad"));
-                cmbPuestos.setSelectedIndex(rs.getInt("IdTipoEmpleado"));
+                //cmbPuestos.setSelectedIndex(rs.getInt("IdTipoEmpleado"));
             
+                int bandIns=rs.getInt("Instructor");
+                if(bandIns==1)
+                    jCheckBox1.setSelected(true);
+                else
+                    jCheckBox1.setSelected(false);
                 Status=rs.getInt("Status");
                 if(Status==0)
                 {
@@ -144,7 +149,7 @@ public class Empleado extends javax.swing.JFrame {
         if(op==1)
         {
             bloquearCampos();
-            cmbPuestos.setEnabled(false);
+            //cmbPuestos.setEnabled(false);
         }
         if(op==2)//2 modificar
         {
@@ -158,7 +163,7 @@ public class Empleado extends javax.swing.JFrame {
             this.btnModificarEmpleado1.setVisible(false);
             bloquearCampos();
             cmbEstado.setEnabled(true);
-            cmbPuestos.setEnabled(false);
+            //cmbPuestos.setEnabled(false);
         }
     }
 
@@ -198,8 +203,6 @@ public class Empleado extends javax.swing.JFrame {
         btnBajaEmpleado = new javax.swing.JButton();
         lblEstado = new javax.swing.JLabel();
         cmbEstado = new javax.swing.JComboBox();
-        lblTipoEmpleado = new javax.swing.JLabel();
-        cmbPuestos = new javax.swing.JComboBox();
         jCheckBox1 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -262,8 +265,6 @@ public class Empleado extends javax.swing.JFrame {
 
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Inactivo", "Activo" }));
 
-        lblTipoEmpleado.setText("Puesto:");
-
         jCheckBox1.setText("Instructor");
 
         javax.swing.GroupLayout panelEmpleadoLayout = new javax.swing.GroupLayout(panelEmpleado);
@@ -306,7 +307,13 @@ public class Empleado extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelEmpleadoLayout.createSequentialGroup()
-                        .addGroup(panelEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(panelEmpleadoLayout.createSequentialGroup()
+                                .addComponent(lblApellidoPaternoEmpleado)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtApellidoPaternoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jCheckBox1))
                             .addGroup(panelEmpleadoLayout.createSequentialGroup()
                                 .addGroup(panelEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblNombreEmpleado)
@@ -314,32 +321,18 @@ public class Empleado extends javax.swing.JFrame {
                                     .addComponent(lblCalleEmpleado))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(panelEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panelEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(lblTipoEmpleado)
-                                        .addGroup(panelEmpleadoLayout.createSequentialGroup()
-                                            .addComponent(txtCalleEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(lblNumeroInterior)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(txtNumeroInteriorEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(panelEmpleadoLayout.createSequentialGroup()
+                                        .addComponent(txtCalleEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblNumeroInterior)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtNumeroInteriorEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(txtTelefonoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtNombreEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(panelEmpleadoLayout.createSequentialGroup()
-                                .addComponent(lblApellidoPaternoEmpleado)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtApellidoPaternoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(panelEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelEmpleadoLayout.createSequentialGroup()
+                                    .addComponent(txtNombreEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(10, 10, 10)
-                                .addComponent(lblColoniaEmpleado)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtColoniaEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelEmpleadoLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(cmbPuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEmpleadoLayout.createSequentialGroup()
-                        .addComponent(jCheckBox1)
-                        .addGap(146, 146, 146)))
+                                .addComponent(lblColoniaEmpleado)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtColoniaEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         panelEmpleadoLayout.setVerticalGroup(
@@ -353,13 +346,11 @@ public class Empleado extends javax.swing.JFrame {
                 .addGroup(panelEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblApellidoPaternoEmpleado)
                     .addComponent(txtApellidoPaternoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTipoEmpleado)
-                    .addComponent(cmbPuestos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCheckBox1))
                 .addGap(18, 18, 18)
                 .addGroup(panelEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblApellidoMaternoEmpleado)
-                    .addComponent(txtApellidoMaternoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1))
+                    .addComponent(txtApellidoMaternoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addGroup(panelEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombreEmpleado)
@@ -520,6 +511,9 @@ public class Empleado extends javax.swing.JFrame {
             correcto=obtenercampos();
             if(correcto==true)
             {
+                int bandIns=0;
+                if(jCheckBox1.isSelected())
+                    bandIns=1;
                 ConexionMySQL mysql = new ConexionMySQL();
                 mysql.MySQLConnection();
                 String Query = "INSERT INTO empleado "
@@ -533,7 +527,7 @@ public class Empleado extends javax.swing.JFrame {
                     + "Colonia,"
                     + "Municipio,"
                     + "Entidad,"
-                    + "IdTipoEmpleado,"
+                    + "Instructor,"
                     + "Status) "
                     + "VALUES "
                     + "("+IdEmpleado+","
@@ -546,7 +540,7 @@ public class Empleado extends javax.swing.JFrame {
                     + "'"+ColoniaEmpleado+"',"
                     + "'"+MunicipioEmpleado+"',"
                     + "'"+EntidadEmpleado+"',"
-                    + "'"+cmbPuestos.getSelectedIndex()+"',"
+                    + "'"+bandIns+"',"
                     + ""+Status+")";
             
                 Statement st = Conexion.createStatement();
@@ -574,7 +568,9 @@ public class Empleado extends javax.swing.JFrame {
         {
             ConexionMySQL conexion = new ConexionMySQL();
             conexion.MySQLConnection();
-            
+            int bandIns=0;
+                if(jCheckBox1.isSelected())
+                    bandIns=1;
             String Query;
             Query="UPDATE empleado SET ApellidoPaterno='"+ApellidoPaternoEmpleado+"',"
                     + ""+"ApellidoMaterno='"+ApellidoPaternoEmpleado+"',"
@@ -584,7 +580,7 @@ public class Empleado extends javax.swing.JFrame {
                     + ""+"Calle='"+CalleEmpleado+"',"
                     + ""+"Colonia='"+ColoniaEmpleado+"',"
                     + ""+"Municipio='"+MunicipioEmpleado+"',"
-                    + ""+"IdTipoEmpleado='"+cmbPuestos.getSelectedIndex()+"',"
+                    + ""+"Instructor='"+bandIns+"',"
                     + ""+"Entidad='"+EntidadEmpleado+"'"
                     +"WHERE IdEmpleado="+IdEmpleado;
             
@@ -663,7 +659,6 @@ public class Empleado extends javax.swing.JFrame {
     private javax.swing.JButton btnIngresarEmpleado;
     private javax.swing.JButton btnModificarEmpleado1;
     private javax.swing.JComboBox cmbEstado;
-    private javax.swing.JComboBox cmbPuestos;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblApellidoMaternoEmpleado;
@@ -676,7 +671,6 @@ public class Empleado extends javax.swing.JFrame {
     private javax.swing.JLabel lblNombreEmpleado;
     private javax.swing.JLabel lblNumeroInterior;
     private javax.swing.JLabel lblTelefonoEmpleado;
-    private javax.swing.JLabel lblTipoEmpleado;
     private javax.swing.JPanel panelEmpleado;
     private javax.swing.JTextField txtApellidoMaternoEmpleado;
     private javax.swing.JTextField txtApellidoPaternoEmpleado;
