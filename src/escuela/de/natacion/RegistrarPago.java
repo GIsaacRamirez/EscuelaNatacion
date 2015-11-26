@@ -522,7 +522,7 @@ public class RegistrarPago extends javax.swing.JFrame {
                                                 + "(" + txtFolio.getText() + ","
                                                 + " " + 0 + ", "
                                                 + " " + asignar.getValueAt(i, 0) + ","
-                                                + " " + asignar.getValueAt(i, 4) + ")";
+                                                + " " + txtTotal.getText().toString() + ")";
                                         st.executeUpdate(u);
                                     }
                                 }
